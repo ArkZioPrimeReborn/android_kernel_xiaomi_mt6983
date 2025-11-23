@@ -1,3 +1,0 @@
-DEVICE=rembrandt
-
-. ${ROOT_DIR}/${KERNEL_DIR}/build.config.xiaomi.common

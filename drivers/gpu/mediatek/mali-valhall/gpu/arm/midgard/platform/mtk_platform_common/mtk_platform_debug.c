@@ -568,7 +568,7 @@ void mtk_debug_csf_dump_groups_and_queues(struct kbase_device *kbdev, int pid)
 
 		list_for_each_entry(kctx, &kbdev->kctx_list, kctx_list_link) {
 			if (kctx->tgid == pid) {
-				mutex_lock(&kctx->csf.lock);
+				rt_mutex_lock(&kctx->csf.lock);
 				kbase_csf_scheduler_lock(kbdev);
 				// cat /sys/kernel/debug/mali0/active_groups
 				// Print debug info for active GPU command queue groups
@@ -841,7 +841,7 @@ void mtk_debug_csf_dump_groups_and_queues(struct kbase_device *kbdev, int pid)
 						BASE_CSF_CPU_QUEUE_DUMP_COMPLETE) {
 					dev_info(kbdev->dev, "[%d_%d] Dump request already started! (try again)", kctx->tgid, kctx->id);
 					kbase_csf_scheduler_unlock(kbdev);
-					mutex_unlock(&kctx->csf.lock);
+					rt_mutex_unlock(&kctx->csf.lock);
 					mutex_unlock(&kbdev->kctx_list_lock);
 					mutex_unlock(&fence_dump_lock);
 					lockdep_on();
@@ -850,11 +850,11 @@ void mtk_debug_csf_dump_groups_and_queues(struct kbase_device *kbdev, int pid)
 
 				atomic_set(&kctx->csf.cpu_queue.dump_req_status, BASE_CSF_CPU_QUEUE_DUMP_ISSUED);
 				init_completion(&kctx->csf.cpu_queue.dump_cmp);
-				kbase_event_wakeup(kctx);
+				_kbase_event_wakeup(kctx, false);
 				//mutex_unlock(&kctx->csf.lock);
 
 				kbase_csf_scheduler_unlock(kbdev);
-				mutex_unlock(&kctx->csf.lock);
+				rt_mutex_unlock(&kctx->csf.lock);
 
 				dev_info(kbdev->dev, "[cpu_queue] CPU Queues table (version:v%u):", MALI_CSF_CPU_QUEUE_DEBUGFS_VERSION);
 				dev_info(kbdev->dev, "[cpu_queue] ##### Ctx %d_%d #####", kctx->tgid, kctx->id);
@@ -868,7 +868,7 @@ void mtk_debug_csf_dump_groups_and_queues(struct kbase_device *kbdev, int pid)
 					return;
 				}
 
-				mutex_lock(&kctx->csf.lock);
+				rt_mutex_lock(&kctx->csf.lock);
 				kbase_csf_scheduler_lock(kbdev);
 
 				if (kctx->csf.cpu_queue.buffer) {
@@ -889,7 +889,7 @@ void mtk_debug_csf_dump_groups_and_queues(struct kbase_device *kbdev, int pid)
 				}
 
 				kbase_csf_scheduler_unlock(kbdev);
-				mutex_unlock(&kctx->csf.lock);
+				rt_mutex_unlock(&kctx->csf.lock);
 			}
 		}
 	}

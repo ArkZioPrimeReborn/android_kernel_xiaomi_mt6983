@@ -1,3 +1,0 @@
-DEVICE=rubens
-
-. ${ROOT_DIR}/${KERNEL_DIR}/build.config.xiaomi.common

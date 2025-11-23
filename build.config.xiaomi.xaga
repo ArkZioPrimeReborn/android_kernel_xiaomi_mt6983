@@ -1,3 +1,0 @@
-DEVICE=xaga
-
-. ${ROOT_DIR}/${KERNEL_DIR}/build.config.xiaomi.common

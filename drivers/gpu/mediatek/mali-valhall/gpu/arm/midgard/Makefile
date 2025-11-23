@@ -246,7 +246,7 @@ ccflags-y += \
     -DMALI_JIT_PRESSURE_LIMIT_BASE=$(MALI_JIT_PRESSURE_LIMIT_BASE) \
     -DMALI_INCREMENTAL_RENDERING=$(MALI_INCREMENTAL_RENDERING) \
     -DMALI_KBASE_BUILD \
-#    -DMALI_PLATFORM_DIR=$(MALI_PLATFORM_DIR)
+    -DMALI_PLATFORM_DIR=$(MALI_PLATFORM_DIR)
 
 
 ifeq ($(KBUILD_EXTMOD),)
@@ -276,6 +276,7 @@ subdir-ccflags-y += $(ccflags-y)
 # LD1.0
 obj-$(CONFIG_MALI_MIDGARD) += mali_kbase_$(MTK_PLATFORM).o
 mali_kbase_$(MTK_PLATFORM)-y := mali_kbase.o
+# obj-y += mali_kbase_$(MTK_PLATFORM).o
 
 ifeq ($(CONFIG_MTK_TRUSTED_MEMORY_SUBSYSTEM), y)
     include $(srctree)/drivers/misc/mediatek/trusted_mem/Makefile.include
@@ -362,7 +363,7 @@ INCLUDE_SUBDIR = \
     $(KO_CODE_PATH)/tl/Kbuild \
     $(KO_CODE_PATH)/gpu/Kbuild \
     $(KO_CODE_PATH)/thirdparty/Kbuild \
-#    $(KO_CODE_PATH)/platform/$(MALI_PLATFORM_DIR)/Kbuild
+    $(KO_CODE_PATH)/platform/$(MALI_PLATFORM_DIR)/Kbuild
 
 ifeq ($(CONFIG_MALI_CSF_SUPPORT),y)
     INCLUDE_SUBDIR += $(KO_CODE_PATH)/csf/Kbuild
