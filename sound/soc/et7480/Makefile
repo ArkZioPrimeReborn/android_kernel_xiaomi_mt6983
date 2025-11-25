@@ -13,3 +13,4 @@ subdir-ccflags-y += \
 
 subdir-ccflags-y += -I$(srctree)/drivers/power/supply/
 subdir-ccflags-y += -I$(srctree)/sound/soc/codecs/
+et7480-depends := mt6338-accdet.ko

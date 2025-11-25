@@ -285,6 +285,8 @@ endif
 
 obj-$(CONFIG_MALI_ARBITRATION) += arbitration/
 obj-$(CONFIG_MALI_KUTF)    += tests/
+obj-y += csf/
+obj-y += ipa/
 
 mali_kbase-y += \
     mali_kbase_cache_policy.o \
@@ -314,7 +316,21 @@ mali_kbase-y += \
     mali_kbase_mem_pool.o \
     mali_kbase_strings.o \
     mali_power_gpu_frequency_trace.o \
-    mali_kbase_trace_gpu_mem.o
+    mali_kbase_trace_gpu_mem.o \
+    mali_kbase_regs_history_debugfs.o \
+    mali_kbase_gpu_memory_debugfs.o \
+    mali_kbase_as_fault_debugfs.o \
+    mali_kbase_dvfs_debugfs.o \
+    mali_kbase_mem_pool_debugfs.o \
+    mali_kbase_debugfs_helper.o \
+    csf/mali_kbase_csf_csg_debugfs.o \
+    mali_kbase_mem_profile_debugfs.o \
+    ipa/mali_kbase_ipa_debugfs.o \
+    csf/mali_kbase_csf_kcpu_debugfs.o \
+    csf/mali_kbase_csf_cpu_queue_debugfs.o \
+    csf/mali_kbase_csf_tiler_heap_debugfs.o
+
+
 
 mali_kbase-$(CONFIG_MALI_CINSTR_GWT) += mali_kbase_gwt.o
 
