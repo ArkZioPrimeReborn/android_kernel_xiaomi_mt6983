@@ -17,7 +17,7 @@ Image.gz
 
 FILES="${FILES}
 arch/arm64/boot/Image.gz
-arch/arm64/boot/dts/vendor/mediatek/mt6093.dtb
+arch/arm64/boot/dts/vendor/mediatek/mt6983.dtb
 vmlinux
 System.map
 "
